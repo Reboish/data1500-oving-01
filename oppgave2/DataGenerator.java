@@ -6,21 +6,22 @@ import java.io.IOException;
 public class DataGenerator {
 
 	  public static void main(String[] args) {
-        // Ta inn filnavn for den nye filen fra kommandolinje
+        // Ta inn filnavn for den nye filen fra kommandolinje 
         String filnavn = args[0];
         // Tips: Ta inn antall linjer som skal genereres fra args[1]
-        // Tips: Husk å "kaste" type til int
-        // Skriv kode her ...
+        // Tips: Husk å "kaste" type til int; fyrer av java.lang.NumberFormatException
+        int antallLinjer = Integer.parseInt(args[1]); 
       
         // Bruk BuffereWriter for å skrive brukerdata til filen
         try (BufferedWriter skriver = new BufferedWriter(new FileWriter(filnavn))) {
             for (int i = 1; i <= antallLinjer; i++) {
                 // Formatter linjen for brukerdata slik som spesifisert i oppgaveteksten (README fil)
                 // Tips: kan bruke String.format metoden for det
-                // Skriv kode her ...
+                String linje = String.format("%d,bruker%d@epost.no,Navn Navnesen %d", i, i, i);
                 // Tips: bruk skriver.write metoden for å skrive den formatterte linjen til filen 
+                skriver.write(linje);
                 // Tips: bruk skriver.newLine() for å skrive en linjeskift tegn til filen
-                // Skriv kode her ...
+                skriver.newLine();
             }
             // Tips: skriv ut til stdout (System.out i java) om hvor mange linjer er blitt skrevet til filen
         } catch (IOException e) {

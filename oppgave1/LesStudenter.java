@@ -7,7 +7,16 @@ import java.io.FileNotFoundException;
 // Velg egnede typer for felt i filen med studentinfo, f.eks. første felt kan være en int, siden den representerer id
 // eller studentnummer. Andre felt, som representerer navn til studenten, kan være en String, for eksempel, osv.
 class Student {
-    // Skriv kode her ...
+    int id;
+    String navn;
+    String program;
+
+    public Student(int id, String navn, String program){
+        this.id = id;
+        this.navn = navn;
+        this.program = program;
+    }
+        
 
     // Metoden erstatter en eksisterende metode toString() 
     @Override
@@ -22,20 +31,37 @@ class Student {
 // stdout(System.out i Java)
 public class LesStudenter {
     public static void main(String[] args) {
+        File fil = new File(args[0]);
+        
         try (Scanner leser = new Scanner(new File(args[0]))) {
             // Tips: bruk while-løkke med leser.hasNextLine() for å sekvensielt gå over alle rader i filen med studentinfo
-            while (leser.hasNext()) {
+            while (leser.hasNextLinw()) {
+
+
+
+                String linje = leser.nextLine();
+                String[] felt = linje.nextLine(",");
+
+                if(felt.lenght == 3){
+                    int id = integer.parseInt(felt[0].trim());
+                    String navn = felt[1].trim();
+                    String program = felt[2].trim();
+
+                    Student s = new Student(id,navn,program);
+                     System.out.println(s);
+                }
                 // Tips: bruk leser.nextLine().split(",") for å splitte opp linje (post) i felt (leses inn i en String[])
                 // Tips: sjekk at lengden til post er 3 (du trenger ikke å implementer else) 
                 // Tips: ta inn det første feltet som int (forutsatt at datafeltet i klassen Student er int)
                 // Skriv kode her ...
                 // Tips: alloker Student-objekt for hver linje i filen med studentinfo (fullfør initialisering av objektet Student)
-                Student s = new Student(...);
+                
                 // Tips: Skriv ut dataene med den overskrevede toString() metoden i klassen Student.
-                System.out.println(s);
+               
             }
-        } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
+        } catch (FileNotFoundException e) {
+            System.err.println("feil: kunne ikke finne filen" + fil.getPath());
+            e.printStackTrace();
         }
     }
 }
